@@ -1,5 +1,10 @@
-from django.http import HttpResponse
+from django.shortcuts import render
+from django.views import View
 
 
-def index(request):
-    return HttpResponse("日記アプリです")
+class IndexView(View):
+    def get(self, request):
+        return render(request, "diary/index.html")
+    
+
+index = IndexView.as_view()
