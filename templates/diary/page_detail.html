@@ -1,0 +1,8 @@
+{% extends "base/diary_base.html" %}
+{% block body %}
+
+<h2>{{ page.title }}</h2>
+<div>{{ page.page_date }}</div>
+<div>{{ page.body | linebreaksbr }}</div>
+
+{% endblock %}
