@@ -1,6 +1,12 @@
 {% extends "base/diary_base.html" %}
 {% block body %}
 
+<form method="POST">
+    {% csrf_token %}
+    <p>このページを削除して良いですか？</p>
+    <button type="submit">削除</button>
+</form>
+
 <h2>{{ page.title }}</h2>
 <div>{{ page.page_date }}</div>
 <div>{{ page.body | linebreaksbr }}</div>
@@ -8,7 +14,5 @@
     <img src="{{ page.picture.url }}"/>
 {% endif %}
 <br>
-<a href="{% url 'diary:page_update' page.id %}">編集</a>
-<a href="{% url 'diary:page_delete' page.id %}">削除</a>
 
 {% endblock %}
