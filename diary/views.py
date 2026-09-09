@@ -1,6 +1,7 @@
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views import View
 
@@ -8,14 +9,14 @@ from .forms import PageForm
 from .models import Page
 
 
-class IndexView(View):
+class IndexView(LoginRequiredMixin, View):
     def get(self, request):
         datetime_now = datetime.now(ZoneInfo("Asia/Tokyo")).strftime("%Y年%m月%d %H:%M:%S")
 
         return render(request, "diary/index.html", {"datetime_now": datetime_now})
 
 
-class PageCreateView(View):
+class PageCreateView(LoginRequiredMixin, View):
     def get(self, request):
         form = PageForm()
         return render(request, "diary/page_form.html", {"form": form})
@@ -28,19 +29,19 @@ class PageCreateView(View):
         return render(request, "diary/page_form.html", {"form": form})
 
 
-class PageListView(View):
+class PageListView(LoginRequiredMixin, View):
     def get(self, request):
         page_list = Page.objects.order_by("-page_date")
         return render(request, "diary/page_list.html", {"page_list": page_list})
 
 
-class PageDetailView(View):
+class PageDetailView(LoginRequiredMixin, View):
     def get(self, request, id):
         page = get_object_or_404(Page, id=id)
         return render(request, "diary/page_detail.html", {"page": page})
 
 
-class PageUpdateView(View):
+class PageUpdateView(LoginRequiredMixin, View):
     def get(self, request, id):
         page = get_object_or_404(Page, id=id)
         form = PageForm(instance=page)
@@ -55,7 +56,7 @@ class PageUpdateView(View):
         return render(request, "diary/page_form.html", {"form": form})
 
 
-class PageDeleteView(View):
+class PageDeleteView(LoginRequiredMixin, View):
     def get(self, request, id):
         page = get_object_or_404(Page, id=id)
         return render(request, "diary/page_confirm_delete.html", {"page": page})

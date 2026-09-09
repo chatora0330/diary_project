@@ -130,3 +130,7 @@ MAILERS = {
 MEDIA_ROOT = BASE_DIR / "media"
 
 MEDIA_URL = "/media/"
+
+LOGIN_REDIRECT_URL = "/diary/"
+
+LOGOUT_REDIRECT_URL = "/login/"
