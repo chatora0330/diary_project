@@ -1,6 +1,7 @@
 import uuid
-from django.db import models
 from pathlib import Path
+
+from django.db import models
 
 
 class Page(models.Model):
@@ -9,7 +10,8 @@ class Page(models.Model):
     body = models.TextField(max_length=2000, verbose_name="本文")
     page_date = models.DateTimeField(verbose_name="日付")
     picture = models.ImageField(
-        upload_to="diary/picture/", blank=True, null=True, verbose_name="写真")
+        upload_to="diary/picture/", blank=True, null=True, verbose_name="写真"
+    )
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="作成日時")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="更新日時")
 

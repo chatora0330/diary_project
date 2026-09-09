@@ -1,0 +1,22 @@
+[tool.ruff]
+# 1行の最大文字数
+line-length = 100
+
+# 使用しているPythonのバージョン
+target-version = "py312"
+
+[tool.ruff.lint]
+# 有効にするルール
+select = [
+    "E",      # pycodestyle
+    "F",      # Pyflakes
+    "I",      # importの並び替え
+    "B",      # bugbear（バグになりやすい書き方）
+    "UP",     # Pythonの新しい書き方を提案
+    "SIM",    # よりシンプルな書き方
+]
+
+[tool.ruff.format]
+# Ruff Formatter
+quote-style = "double"
+indent-style = "space"
