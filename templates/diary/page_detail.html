@@ -8,7 +8,7 @@
     <img src="{{ page.picture.url }}"/>
 {% endif %}
 <br>
-<a href="{% url 'diary:page_update' page.id %}">編集</a>
-<a href="{% url 'diary:page_delete' page.id %}">削除</a>
+<a href="{% url 'diary:page_update' page.id %}" class="button">編集</a>
+<a href="{% url 'diary:page_delete' page.id %}" class="button">削除</a>
 
 {% endblock %}

@@ -53,7 +53,7 @@ class PageUpdateView(LoginRequiredMixin, View):
         if form.is_valid():
             form.save()
             return redirect("diary:page_detail", id=id)
-        return render(request, "diary/page_form.html", {"form": form})
+        return render(request, "diary/page_update.html", {"form": form})
 
 
 class PageDeleteView(LoginRequiredMixin, View):

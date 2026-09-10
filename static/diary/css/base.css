@@ -1,0 +1,35 @@
+body{
+    width: 700px;
+    min-height: 300px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 1.5%;
+    margin-bottom: 1.5%;
+    background-color: #f3f1f0;
+}
+
+h1{
+    font-size: 30px;
+    font-size: 3rem;
+    position: relative;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.button{
+    display: inline-flex;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem;
+    border: 1px solid #000000;
+    border-radius: 0.3rem;
+    background-color: #f3f1f0;
+    color: #000000;
+    text-decoration: none;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.button:hover{
+    background-color: hsl(236, 33%, 82%);
+    color: #0e0000;
+}
