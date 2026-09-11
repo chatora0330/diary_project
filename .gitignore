@@ -17,6 +17,7 @@ media/
 # 環境変数・秘密情報
 .env
 .env.*
+!.env.example
 
 # IDE
 .vscode/
