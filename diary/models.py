@@ -40,6 +40,17 @@ class Page(models.Model):
     def __str__(self):
         return self.title
 
+    def save(self, *args, **kwargs):
+        old_page = None
+
+        if self.pk:
+            old_page = Page.objects.filter(pk=self.pk).first()
+
+        if old_page and old_page.picture and old_page.picture != self.picture:
+            Path(old_page.picture.path).unlink(missing_ok=True)
+
+        super().save(*args, **kwargs)    
+
     def delete(self, *args, **kwargs):
         picture = self.picture
         super().delete(*args, **kwargs)

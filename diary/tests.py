@@ -1,9 +1,13 @@
 from datetime import datetime
+from io import BytesIO
+from pathlib import Path
 from zoneinfo import ZoneInfo
 
 from django.contrib.auth.models import User
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 from django.urls import reverse
+from PIL import Image
 
 from .models import Page
 
@@ -107,4 +111,41 @@ class PageAccessTest(TestCase):
 
         self.assertTrue(
             Page.objects.filter(id=self.page.id).exists()
+        )
+        
+    def test_replace_picture_deletes_old_picture(self):
+        self.client.login(
+            username="user_a",
+            password="testpassword123",
+        )
+
+        old_image = BytesIO()
+        Image.new("RGB", (100, 100)).save(old_image, format="JPEG")
+        old_image.seek(0)
+
+        self.page.picture = SimpleUploadedFile(
+            "old.jpg",
+            old_image.read(),
+            content_type="image/jpeg",
+        )
+        self.page.save()
+
+        old_picture_path = self.page.picture.path
+
+        new_image = BytesIO()
+        Image.new("RGB", (100, 100)).save(new_image, format="JPEG")
+        new_image.seek(0)
+
+        self.page.picture = SimpleUploadedFile(
+            "new.jpg",
+            new_image.read(),
+            content_type="image/jpeg",
+        )
+        self.page.save()
+
+        self.assertFalse(
+            Path(old_picture_path).exists()
+        )
+        self.assertTrue(
+            Path(self.page.picture.path).exists()
         )
