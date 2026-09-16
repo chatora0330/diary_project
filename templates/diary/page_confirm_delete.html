@@ -11,7 +11,11 @@
 <div>{{ page.page_date }}</div>
 <div>{{ page.body | linebreaksbr }}</div>
 {% if page.picture %}
-    <img src="{{ page.picture.url }}"/>
+    <img 
+        src="{{ page.picture.url }}" 
+        alt="{{ page.title }}"
+        class="diary-picture"
+    >
 {% endif %}
 <br>
 

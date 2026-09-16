@@ -28,7 +28,7 @@ class PageAccessTest(TestCase):
             user=self.user_a,
             title="Aさんの日記",
             body="これはAさんの日記です。",
-            page_date=datetime(2026,9,12,12,0,tzinfo=ZoneInfo("Asia/Tokyo")),
+            page_date=datetime(2026, 9, 12, 12, 0, tzinfo=ZoneInfo("Asia/Tokyo")),
         )
 
     def test_user_a_can_view_own_page(self):
@@ -37,9 +37,7 @@ class PageAccessTest(TestCase):
             password="testpassword123",
         )
 
-        response = self.client.get(
-            reverse("diary:page_detail", kwargs={"id": self.page.id})
-        )
+        response = self.client.get(reverse("diary:page_detail", kwargs={"id": self.page.id}))
 
         self.assertEqual(response.status_code, 200)
 
@@ -49,13 +47,10 @@ class PageAccessTest(TestCase):
             password="testpassword123",
         )
 
-        response = self.client.get(
-            reverse("diary:page_detail", kwargs={"id": self.page.id})
-        )
+        response = self.client.get(reverse("diary:page_detail", kwargs={"id": self.page.id}))
 
         self.assertEqual(response.status_code, 404)
-        
-        
+
     def test_user_can_see_only_own_pages(self):
         Page.objects.create(
             user=self.user_b,
@@ -76,26 +71,20 @@ class PageAccessTest(TestCase):
             password="testpassword123",
         )
 
-        response = self.client.get(
-            reverse("diary:page_list")
-        )
+        response = self.client.get(reverse("diary:page_list"))
 
         self.assertContains(response, "Aさんの日記")
         self.assertNotContains(response, "Bさんの日記")
-        
-        
+
     def test_user_b_cannot_update_user_a_page(self):
         self.client.login(
             username="user_b",
             password="testpassword123",
         )
 
-        response = self.client.get(
-            reverse("diary:page_update", kwargs={"id": self.page.id})
-        )
+        response = self.client.get(reverse("diary:page_update", kwargs={"id": self.page.id}))
 
         self.assertEqual(response.status_code, 404)
-
 
     def test_user_b_cannot_delete_user_a_page(self):
         self.client.login(
@@ -103,16 +92,12 @@ class PageAccessTest(TestCase):
             password="testpassword123",
         )
 
-        response = self.client.post(
-            reverse("diary:page_delete", kwargs={"id": self.page.id})
-        )
+        response = self.client.post(reverse("diary:page_delete", kwargs={"id": self.page.id}))
 
         self.assertEqual(response.status_code, 404)
 
-        self.assertTrue(
-            Page.objects.filter(id=self.page.id).exists()
-        )
-        
+        self.assertTrue(Page.objects.filter(id=self.page.id).exists())
+
     def test_replace_picture_deletes_old_picture(self):
         self.client.login(
             username="user_a",
@@ -143,9 +128,5 @@ class PageAccessTest(TestCase):
         )
         self.page.save()
 
-        self.assertFalse(
-            Path(old_picture_path).exists()
-        )
-        self.assertTrue(
-            Path(self.page.picture.path).exists()
-        )
+        self.assertFalse(Path(old_picture_path).exists())
+        self.assertTrue(Path(self.page.picture.path).exists())

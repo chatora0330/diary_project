@@ -33,3 +33,8 @@ h1{
     background-color: hsl(236, 33%, 82%);
     color: #0e0000;
 }
+
+.diary-picture {
+    max-width: 100%;
+    height: auto;
+}

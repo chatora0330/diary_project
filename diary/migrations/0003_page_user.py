@@ -6,16 +6,22 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('diary', '0002_page_picture'),
+        ("diary", "0002_page_picture"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='page',
-            name='user',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='pages', to=settings.AUTH_USER_MODEL, verbose_name='ユーザー'),
+            model_name="page",
+            name="user",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="pages",
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="ユーザー",
+            ),
         ),
     ]

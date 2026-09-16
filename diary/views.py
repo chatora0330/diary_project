@@ -40,7 +40,7 @@ class PageListView(LoginRequiredMixin, View):
 class PageDetailView(LoginRequiredMixin, View):
     def get(self, request, id):
         page = get_object_or_404(
-            Page, 
+            Page,
             id=id,
             user=request.user,
         )
