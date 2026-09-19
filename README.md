@@ -92,6 +92,7 @@ diary_project/
 ├── .gitignore
 ├── manage.py
 ├── pyproject.toml
+├── requirements.txt
 └── README.md
 ```
 
@@ -121,7 +122,7 @@ python -m venv .venv
 ### 3. パッケージをインストール
 
 ```powershell
-pip install django==6.1 pillow==12.3.0 python-dotenv==1.2.3 ruff==0.16.4
+pip install -r requirements.txt
 ```
 
 ### 4. `.env`を作成
