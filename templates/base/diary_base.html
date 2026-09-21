@@ -8,9 +8,17 @@
         <link rel="stylesheet" href="{% static 'diary/css/base.css' %}">
         <script src="{% static 'diary/js/base.js' %}"></script>
     </head>
+
     <body>
-        <h1><a href="{% url 'diary:index' %}">日記アプリ</a></h1>
-        {% block body %}
-        {% endblock %}
+        <header class="site-header">
+            <h1 class="site-title">
+                <a href="{% url 'diary:index' %}">日記アプリ</a>
+            </h1>
+        </header>
+
+        <main>
+            {% block body %}
+            {% endblock %}
+        </main>
     </body>
 </html>

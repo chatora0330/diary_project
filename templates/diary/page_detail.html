@@ -1,18 +1,47 @@
 {% extends "base/diary_base.html" %}
 {% block body %}
 
-<h2>{{ page.title }}</h2>
-<div>{{ page.page_date }}</div>
-<div>{{ page.body | linebreaksbr }}</div>
-{% if page.picture %}
-    <img 
-        src="{{ page.picture.url }}" 
-        alt="{{ page.title }}"
-        class="diary-picture"
-    >
-{% endif %}
-<br>
-<a href="{% url 'diary:page_update' page.id %}" class="button">編集</a>
-<a href="{% url 'diary:page_delete' page.id %}" class="button">削除</a>
+<article class="diary-detail">
+    <p class="diary-date">
+        {{ page.page_date|date:"Y年m月d日 H:i" }}
+    </p>
+
+    <h2 class="diary-detail-title">{{ page.title }}</h2>
+
+    {% if page.picture %}
+        <img
+            src="{{ page.picture.url }}"
+            alt="{{ page.title }}"
+            class="diary-picture"
+        >
+    {% endif %}
+
+    <div class="diary-body">
+        {{ page.body|linebreaksbr }}
+    </div>
+
+    <div class="diary-actions">
+        <a
+            href="{% url 'diary:page_update' page.id %}"
+            class="button"
+        >
+            編集
+        </a>
+
+        <a
+            href="{% url 'diary:page_delete' page.id %}"
+            class="button"
+        >
+            削除
+        </a>
+
+        <a
+            href="{% url 'diary:page_list' %}"
+            class="button"
+        >
+            一覧に戻る
+        </a>
+    </div>
+</article>
 
 {% endblock %}

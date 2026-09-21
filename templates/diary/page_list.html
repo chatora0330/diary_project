@@ -1,14 +1,29 @@
 {% extends "base/diary_base.html" %}
 {% block body %}
 
-<ul>
+<div class="page-list">
     {% for page in page_list %}
-        <li>{{ page.page_date }}: 
-            <a href="{% url 'diary:page_detail' page.id %}">{{ page.title }}</a>
-        </li>
+        <article class="diary-card">
+            <p class="diary-date">
+                {{ page.page_date|date:"Y年m月d日 H:i" }}
+            </p>
+
+            <h2 class="diary-title">
+                <a href="{% url 'diary:page_detail' page.id %}">
+                    {{ page.title }}
+                </a>
+            </h2>
+
+            <a
+                class="button diary-detail-button"
+                href="{% url 'diary:page_detail' page.id %}"
+            >
+                詳細を見る
+            </a>
+        </article>
     {% empty %}
-        <div>日記のページが1つもありません。</div>
+        <p class="empty-message">日記のページが1つもありません。</p>
     {% endfor %}
-</ul>
+</div>
 
 {% endblock %}

@@ -1,10 +1,24 @@
 {% extends "base/diary_base.html" %}
 {% block body %}
 
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">更新</button>
-</form>
+<div class="diary-form-card">
+    <h2 class="diary-form-title">日記を編集する</h2>
+
+    <form method="POST" enctype="multipart/form-data" class="diary-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <div class="form-actions">
+            <button type="submit" class="button">更新</button>
+
+            <a
+                href="{% url 'diary:page_list' %}"
+                class="button"
+            >
+                キャンセル
+            </a>
+        </div>
+    </form>
+</div>
 
 {% endblock %}

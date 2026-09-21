@@ -1,22 +1,47 @@
 {% extends "base/diary_base.html" %}
 {% block body %}
 
-<form method="POST">
-    {% csrf_token %}
-    <p>このページを削除して良いですか？</p>
-    <button type="submit">削除</button>
-</form>
+<div class="delete-card">
+    <h2 class="delete-title">日記を削除しますか？</h2>
 
-<h2>{{ page.title }}</h2>
-<div>{{ page.page_date }}</div>
-<div>{{ page.body | linebreaksbr }}</div>
-{% if page.picture %}
-    <img 
-        src="{{ page.picture.url }}" 
-        alt="{{ page.title }}"
-        class="diary-picture"
-    >
-{% endif %}
-<br>
+    <p class="delete-message">
+        以下の日記を削除します。この操作は取り消せません。
+    </p>
+
+    <div class="delete-preview">
+        <p class="diary-date">
+            {{ page.page_date|date:"Y年m月d日 H:i" }}
+        </p>
+
+        <h3>{{ page.title }}</h3>
+
+        {% if page.picture %}
+            <img
+                src="{{ page.picture.url }}"
+                alt="{{ page.title }}"
+                class="diary-picture"
+            >
+        {% endif %}
+
+        <div class="diary-body">
+            {{ page.body|linebreaksbr }}
+        </div>
+    </div>
+
+    <form method="POST" class="delete-actions">
+        {% csrf_token %}
+
+        <button type="submit" class="button delete-button">
+            削除する
+        </button>
+
+        <a
+            href="{% url 'diary:page_detail' page.id %}"
+            class="button"
+        >
+            キャンセル
+        </a>
+    </form>
+</div>
 
 {% endblock %}
