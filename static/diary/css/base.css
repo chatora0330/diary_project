@@ -307,3 +307,56 @@ h2 {
     background-color: #f5dddd;
     color: #882222;
 }
+
+.auth-card {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 2rem;
+    border: 1px solid #dddddd;
+    border-radius: 0.8rem;
+    background-color: #ffffff;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 8%);
+}
+
+.auth-title {
+    margin: 0 0 1.5rem;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.auth-form p {
+    margin: 0 0 1.2rem;
+}
+
+.auth-form label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: bold;
+}
+
+.auth-form input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0.7rem;
+    border: 1px solid #cccccc;
+    border-radius: 0.4rem;
+    background-color: #ffffff;
+    font: inherit;
+}
+
+.auth-form input:focus {
+    outline: none;
+    border-color: #7777aa;
+    box-shadow: 0 0 0 2px rgb(119 119 170 / 15%);
+}
+
+.auth-form .form-actions {
+    justify-content: center;
+}
+
+.auth-form .errorlist {
+    margin: 0 0 0.5rem;
+    padding: 0;
+    color: #b00020;
+    list-style: none;
+}
