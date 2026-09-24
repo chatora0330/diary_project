@@ -2,7 +2,7 @@
 {% block body %}
 
 <div class="page-list">
-    {% for page in page_list %}
+    {% for page in page_obj %}
         <article class="diary-card">
             <p class="diary-date">
                 {{ page.page_date|date:"Y年m月d日 H:i" }}
@@ -27,3 +27,29 @@
 </div>
 
 {% endblock %}
+
+{% if page_obj.has_other_pages %}
+    <nav class="pagination" aria-label="日記一覧のページ移動">
+        {% if page_obj.has_previous %}
+            <a
+                href="?page={{ page_obj.previous_page_number }}"
+                class="button"
+            >
+                前へ
+            </a>
+        {% endif %}
+
+        <span class="pagination-current">
+            {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+        </span>
+
+        {% if page_obj.has_next %}
+            <a
+                href="?page={{ page_obj.next_page_number }}"
+                class="button"
+            >
+                次へ
+            </a>
+        {% endif %}
+    </nav>
+{% endif %}

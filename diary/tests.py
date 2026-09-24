@@ -130,3 +130,40 @@ class PageAccessTest(TestCase):
 
         self.assertFalse(Path(old_picture_path).exists())
         self.assertTrue(Path(self.page.picture.path).exists())
+
+    def test_page_list_pagination(self):
+        self.client.login(
+            username="user_a",
+            password="testpassword123",
+        )
+
+        for number in range(2, 12):
+            Page.objects.create(
+                user=self.user_a,
+                title=f"日記{number}",
+                body=f"日記{number}の本文です。",
+                page_date=datetime(
+                    2026,
+                    9,
+                    number,
+                    12,
+                    0,
+                    tzinfo=ZoneInfo("Asia/Tokyo"),
+                ),
+            )
+
+        response = self.client.get(reverse("diary:page_list"))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.context["page_obj"]), 10)
+        self.assertTrue(response.context["page_obj"].has_next())
+
+        response = self.client.get(
+            reverse("diary:page_list"),
+            {"page": 2},
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.context["page_obj"]), 1)
+        self.assertFalse(response.context["page_obj"].has_next())
+        self.assertTrue(response.context["page_obj"].has_previous())

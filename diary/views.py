@@ -2,6 +2,7 @@ from datetime import datetime
 from zoneinfo import ZoneInfo
 
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views import View
 
@@ -34,7 +35,12 @@ class PageCreateView(LoginRequiredMixin, View):
 class PageListView(LoginRequiredMixin, View):
     def get(self, request):
         page_list = Page.objects.filter(user=request.user).order_by("-page_date")
-        return render(request, "diary/page_list.html", {"page_list": page_list})
+        
+        paginator = Paginator(page_list, 10)
+        page_number = request.GET.get("page")
+        page_obj = paginator.get_page(page_number)
+        
+        return render(request, "diary/page_list.html", {"page_obj": page_obj})
 
 
 class PageDetailView(LoginRequiredMixin, View):
