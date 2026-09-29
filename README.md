@@ -62,6 +62,9 @@ Djangoで作成した日記管理アプリです。
 
 ```text
 diary_project/
+├── .github/
+│   └── workflows/
+│       └── ci.yml
 ├── accounts/
 │   ├── migrations/
 │   │   └── __init__.py
